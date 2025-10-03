@@ -1,0 +1,13 @@
+[Unit]
+Description=Mock sensor logger for the assignment (Go)
+After=multi-user.target
+
+[Service]
+Type=simple
+User=assignment
+ExecStart=/usr/local/bin/assignment-sensor --interval=5s --logfile=/var/log/assignment-sensor/assignment_sensor.log --device=/dev/urandom
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target
