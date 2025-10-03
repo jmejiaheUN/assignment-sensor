@@ -9,7 +9,7 @@ We use `/dev/urandom` as the default mock source because it's universally availa
 For portability you can also choose `--device=internal` to use a built-in PRNG.
 
 ## Cloning the repo
-git clone https://github.com/<your-username>/assignment-sensor.git
+git clone https://github.com/jmejiaheUN/assignment-sensor.git
 cd assignment-sensor
 
 
@@ -58,6 +58,10 @@ tail -n 3 /var/log/assignment-sensor/assignment_sensor.log
 sudo make uninstall
 ```
 
+## Disable Example
+
+sudo systemctl disable --now assignment-sensor.service
+
 ## Tests
 ```bash
 chmod +x tests/*.sh
@@ -67,6 +71,9 @@ chmod +x tests/*.sh
 ## Failure behavior test
 
 ./build/assignment-sensor --interval=0s --device=internal
+echo "exit code: $?"   # expect non-zero
+
+./build/assignment-sensor --device=/dev/does-not-exist --interval=1s
 echo "exit code: $?"   # expect non-zero
 
 ## ✅ Verification Checklist
